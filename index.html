@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Array Reduce Cardio</title>
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <ul>
+        <li data-time="1:10">Video 1 - 1:10</li>
+        <li data-time="6:10">Video 2 - 6:10</li>
+        <li data-time="2:14">Video 3 - 2:14</li>
+        <li data-time="3:44">Video 4 - 3:44</li>
+        <li data-time="5:05">Video 5 - 5:05</li>
+        <li data-time="6:03">Video 6 - 6:03</li>
+        <li data-time="4:04">Video 7 - 4:04</li>
+        <li data-time="3:34">Video 8 - 3:34</li>
+        <li data-time="1:56">Video 9 - 1:56</li>
+        <li data-time="12:39">Video 10 - 12:39</li>
+        <li data-time="14:19">Video 11 - 14:19</li>
+        <li data-time="15:30">Video 12 - 15:30</li>
+      </ul>
+      <button id="total" autofocus>Total</button>
+    </div>
+
+    <script>
+      const allVideosArr = Array.from(document.querySelectorAll("[data-time]"));
+
+      const totalSeconds = allVideosArr
+        .map(video => video.dataset.time.split(":")) // ["1", ""]
+        .map(times => times[0] * 60 + times[1] * 1) // no need to use Number() or parseInt()
+        .reduce((a, b) => a + b);
+
+      const remainingSeconds =
+        totalSeconds % 60 < 10 ? `0${totalSeconds % 60}` : totalSeconds % 60;
+      const remainingMinutes =
+        (totalSeconds / 60) % 60 < 10
+          ? `0${Math.floor((totalSeconds / 60) % 60)}`
+          : Math.floor((totalSeconds / 60) % 60);
+      const remainingHours = Math.floor(totalSeconds / 60 / 60);
+
+      document
+        .getElementById("total")
+        .addEventListener("click", () =>
+          alert(
+            `Total video time: ${remainingHours}:${remainingMinutes}:${remainingSeconds}`
+          )
+        );
+    </script>
+
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        background-color: black;
+      }
+
+      #wrapper {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        color: #c8c8c8;
+      }
+
+      ul {
+        padding: 0;
+      }
+
+      #total {
+        width: 11em;
+        background-color: #17181c;
+        color: #c8c8c8;
+      }
+    </style>
+  </body>
+</html>
