@@ -1,0 +1,26 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+}
+
+#wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: #c8c8c8;
+}
+
+ul {
+  padding: 0;
+}
+
+#total {
+  width: 11em;
+  background-color: #17181c;
+  color: #c8c8c8;
+}
